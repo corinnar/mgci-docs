@@ -8,6 +8,7 @@
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+warnings.txt
 
 # IPython
 profile_default/
@@ -154,3 +155,5 @@ dmypy.json
 cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks
+docs/source/qgis - Copy.rst
+docs/source/annex.rst

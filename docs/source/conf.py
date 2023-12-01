@@ -1,37 +1,79 @@
 # Configuration file for the Sphinx documentation builder.
 
-from datetime import datetime
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(".").resolve()))
+
 
 # -- Project information
 
-project = "SDG 15.4.2: Mountain Green Cover Index"
-copyright = f"2021 - FAO SEPAL - UNEP-WCMC"
-author = 'FAO SEPAL - UNEP-WCMC'
+project = "SDG 15.4.2: (a) Mountain Green Cover Index and (b) proportion of degraded mountain land"
+copyright = "2023 - FAO SEPAL - UNEP-WCMC"
+author = "FAO SEPAL - UNEP-WCMC"
 
-release = '0.1'
-version = '0.1.0'
-
-# -- General configuration
+# -- General configuration -----------------------------------------------------
 
 extensions = [
-    'sphinx.ext.duration',
-    'sphinx.ext.doctest',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.intersphinx',
+    "sphinx.ext.napoleon",
+    "sphinx.ext.graphviz",
+    "sphinxcontrib.images",
+    "sphinxcontrib.icon",
+    "sphinxcontrib.btn",
+    "sphinxcontrib.email",
+    "sphinx_design",
+    "sphinx_togglebutton",
+    "sphinx_favicon",
+    "sphinx_last_updated_by_git",
+    "notfound.extension",
+    "_extentions.line_break",
+    # "_extentions.custom_edit",
+    # "_extentions.logos",
 ]
 
-intersphinx_mapping = {
-    'python': ('https://docs.python.org/3/', None),
-    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
+templates_path = ["_templates"]
+exclude_patterns = ["**.ipynb_checkpoints"]
+locale_dirs = ["_locale/"]
+gettext_compact = False
+language = "en"
+
+# -- Options for HTML output ---------------------------------------------------
+
+templates_path = ["_templates"]
+html_theme = "pydata_sphinx_theme"
+html_last_updated_fmt = None
+html_sidebars = {"index": []}
+html_static_path = ["_static"]
+
+html_theme_options = {
+    "logo": {
+        "image_light": "_static/main.png",
+        "image_dark": "_static/main.png",
+    },
+    "header_links_before_dropdown": 7,
+    "navigation_with_keys": False,
+    "show_nav_level": 1,
+    "show_prev_next": True,
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/sepal-contrib/wcmc-mgci",
+            "icon": "fa-brands fa-github",
+        },
+    ],
+    "article_footer_items": ["last-updated"],
+    "footer_start": ["copyright", "sphinx-version"],
 }
-intersphinx_disabled_domains = ['std']
 
-templates_path = ['_templates']
+# -- Option for Latex output ---------------------------------------------------
 
-# -- Options for HTML output
+youtube_cmd = (
+    r"\newcommand{\sphinxcontribyoutube}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}"
+    + "\n"
+)
+vimeo_cmd = (
+    r"\newcommand{\sphinxcontribvimeo}[3]{\begin{figure}\sphinxincludegraphics{{#2}.jpg}\caption{\url{#1#2#3}}\end{figure}}"
+    + "\n"
+)
 
-html_theme = 'sphinx_rtd_theme'
-
-# -- Options for EPUB output
-epub_show_urls = 'footnote'
+latex_elements = {"preamble": youtube_cmd + vimeo_cmd}
